@@ -85,6 +85,69 @@ function randomBetween() {
     render(rndNum)
 }
 
+
+
+/* 
+  Function 6 — changeTitle()
+  ---------------------------
+*/
+function changeTitle() {
+  const newTitle = prompt("Enter a new title for the page:")
+  if (newTitle) {
+    document.title = newTitle
+    render(`<p>Page title changed to: <strong>${newTitle}</strong></p>`)
+  } else {
+    render("<p>You didn’t enter a title!</p>")
+  }
+}
+
+/* 
+  Function 6 — cycleTextColor()
+  ---------------------------
+*/
+let colorIndex = 0
+const colors = ["red", "green", "orange", "blue", "purple"];
+
+function cycleTextColor() {
+  const out = document.getElementById('out');
+  colorIndex = (colorIndex + 1) % colors.length;
+  out.style.setProperty('color', colors[colorIndex], 'important');
+  const p = document.createElement('p');
+  p.innerHTML = `Text color changed to <strong>${colors[colorIndex]}</strong>`;
+  out.appendChild(p);
+}
+
+/* 
+  Function 7 — randomBgColor()
+  ---------------------------
+*/
+
+function randomBgColor() {
+  const r = Math.floor(Math.random() * 256)
+  const g = Math.floor(Math.random() * 256)
+  const b = Math.floor(Math.random() * 256)
+  const color = `rgb(${r}, ${g}, ${b})`
+  const out = document.getElementById("out")
+  out.style.backgroundColor = color
+  render(`<p>Background color changed to ${color}</p>`)
+}
+
+/* 
+  Function 8 — doubleNumber()
+  ---------------------------
+*/
+function doubleNumber() {
+  const num = parseFloat(prompt("Enter a number:"))
+  if (isNaN(num)) {
+    render("<p>That’s not a valid number!</p>")
+    return
+  }
+  render(`<p>${num} doubled is <strong>${num * 2}</strong></p>`)
+}
+
+
+
+
 /* 
   Function 5 — clearOutput()
   ---------------------------
@@ -92,15 +155,28 @@ function randomBetween() {
   - Replace it with a placeholder message like "Output cleared."
 */
 function clearOutput() {
-  // TODO: Write your code here
+  const out = document.getElementById('out');
+    out.style.color = '';
+  out.style.backgroundColor = '';
+  out.innerHTML = "<p>Output cleared.</p>";
 }
+
 
 // ---- Event listeners for the demo buttons ----
 document.getElementById('btnGreet').addEventListener('click', greet)
 document.getElementById('btnAvg').addEventListener('click', averageNumbers)
 document.getElementById('btnTime').addEventListener('click', timeOfDay)
 document.getElementById('btnRandom').addEventListener('click', randomBetween)
+document.getElementById('btnTitle').addEventListener('click', changeTitle)
+document.getElementById('btnColor').addEventListener('click', cycleTextColor)
+document.getElementById('btnBg').addEventListener('click', randomBgColor)
+document.getElementById('btnDouble').addEventListener('click', doubleNumber)
+
 document.getElementById('btnClear').addEventListener('click', clearOutput)
+
+
+
+
 
 /* 
   ------------------------------------------
